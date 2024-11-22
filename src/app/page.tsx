@@ -4,14 +4,35 @@ import styles from './Home.module.scss';
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [typedText, setTypedText] = useState("");
 
   useEffect(() => {
-    setIsLoaded(true);
+    const loadImages = setTimeout(() => setIsLoaded(true), 1000); 
+    return () => clearTimeout(loadImages);
   }, []);
+
+  useEffect(() => {
+    if (isLoaded) {
+      const locationText = "CISON DI VALMARINO, PROVINCE OF TREVISO";
+      let index = 0;
+
+      const typeWriter = setInterval(() => {
+        if (index < locationText.length) {
+          setTypedText((prev) => locationText.slice(0, index + 1));
+          index++;
+        } else {
+          clearInterval(typeWriter);
+        }
+      }, 100); // Typing speed in ms
+
+      return () => clearInterval(typeWriter);
+    }
+  }, [isLoaded]);
   return (
     <div className={styles.container}>
 
       {/* Hero Section */}
+      <span className={styles.location}>{typedText}</span>
       <section className={styles.hero}>
         {/* Left Section: Text */}
         <div className={`${styles.left} ${isLoaded ? styles.animateLeft : ''}`}>
@@ -106,6 +127,30 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section className={styles.ceremonyReception}>
+  <div className={styles.event}>
+    <div className={styles.time}>17:00–18:00</div>
+    <div className={styles.details}>
+      <h3 className={styles.title}>Ceremony</h3>
+      <p>Attire: Formal / Black Tie</p>
+      <p>San Martino Chapel Castel Brando</p>
+    </div>
+  </div>
+
+  <div className={styles.event}>
+    <div className={styles.time}>18:00–19:00</div>
+    <div className={styles.details}>
+      <h3 className={styles.title}>Reception</h3>
+      <p>Attire: Formal</p>
+      <p>Reception San Martino Terrace Castel Brando</p>
+    </div>
+  </div>
+
+  <div className={styles.logo}>
+    <p>T&amp;R</p>
+  </div>
+</section>
     </div>
   );
 }

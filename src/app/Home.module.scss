@@ -168,7 +168,15 @@
     }
   }
 }
-
+.location{
+  color: $neutral-dark;
+    font-size: 20px;
+    display: flex;
+    letter-spacing: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 .excite{
   display: flex;
   align-items: center;
@@ -214,7 +222,7 @@
 }
 
 .schedule {
-  padding: 6rem 4rem;
+ // padding: 6rem 4rem;
   background: linear-gradient(to bottom, $secondary-cream, #ffffff);
   text-align: center;
 
@@ -253,12 +261,15 @@
     max-width: 700px;
   
     // Add subtle floral pattern
-    background-image: url('/img/roses-pattern.png');
-    background-size: cover;
+    background-image: url('/img/tanseli.png');
+    background-size: 30%;
     background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.95; // Slight transparency for elegance
-  
+    background-position: right center;
+    background-blend-mode: multiply; 
+    background: linear-gradient(to left, rgba(255, 255, 255, 0) 70%, #fdf8f5), 
+              url('/img/tanseli.png') no-repeat right center;
+  background-size: 30%;
+    opacity: 0.95; 
     &:before {
       content: '';
       position: absolute;
@@ -345,6 +356,69 @@
         font-size: 1rem;
         line-height: 1.5;
       }
+    }
+  }
+}
+
+.ceremonyReception {
+  background-color: $secondary-cream;
+  padding: 4rem 2rem;
+  text-align: center;
+
+  .event {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+
+    &:last-child {
+      margin-bottom: 3rem; // Add extra spacing below the last event
+    }
+
+    .time {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $neutral-dark;
+      margin-bottom: 1rem;
+    }
+
+    .details {
+      text-align: center;
+
+      .title {
+        font-size: 1.8rem;
+        color: $primary-blue;
+        margin-bottom: 0.5rem;
+        font-family: 'Playfair Display', serif;
+      }
+
+      p {
+        font-size: 1.2rem;
+        color: $neutral-dark;
+        margin: 0.2rem 0;
+      }
+    }
+  }
+
+  .logo {
+    font-size: 3rem;
+    color: $neutral-dark;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    margin-top: 2rem;
+
+    p {
+      border-top: 2px solid $primary-blue;
+      border-bottom: 2px solid $primary-blue;
+      display: inline-block;
+      padding: 0.5rem 1rem;
     }
   }
 }
