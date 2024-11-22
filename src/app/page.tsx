@@ -18,7 +18,7 @@ export default function Home() {
 
       const typeWriter = setInterval(() => {
         if (index < locationText.length) {
-          setTypedText((prev) => locationText.slice(0, index + 1));
+          setTypedText(locationText.slice(0, index + 1));
           index++;
         } else {
           clearInterval(typeWriter);
@@ -37,7 +37,7 @@ export default function Home() {
         {/* Left Section: Text */}
         <div className={`${styles.left} ${isLoaded ? styles.animateLeft : ''}`}>
           <h1 className={styles.title}>Tanseli & Roger</h1>
-          <p className={styles.subtitle}>We're getting married!</p>
+          <p className={styles.subtitle}>We&apos;re getting married!</p>
           <p className={styles.date}>Saturday, August 30, 2024</p>
           <a href="#rsvp" className={styles.rsvpButton}>RSVP</a>
         </div>
@@ -62,7 +62,7 @@ export default function Home() {
       </section>
 
       <section className={styles.excite}>
-        <p>We're so excited to celebrate this special moment with our closest loved ones!</p>
+        <p>We&apos;re so excited to celebrate this special moment with our closest loved ones!</p>
       </section>
 
       <section className={styles.schedule}>
