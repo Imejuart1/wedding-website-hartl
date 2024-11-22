@@ -1,0 +1,161 @@
+// Color Palette
+$primary-blue: #7393b3;
+$secondary-cream: #fdf8f5;
+$neutral-dark: #333333;
+$rsvp-hover: #5a7c99;
+
+// Container
+.container {
+  font-family: 'Georgia', serif;
+  background-color: $secondary-cream;
+  min-height: 100vh;
+}
+
+// Navbar
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 6rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $neutral-dark;
+  }
+
+  .navLinks {
+    display: flex;
+    gap: 1.5rem;
+
+    .navLink {
+      text-decoration: none;
+      font-size: 1rem;
+      color: $neutral-dark;
+      transition: color 0.3s;
+
+      &:hover {
+        color: $primary-blue;
+      }
+    }
+
+    .rsvpButton {
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border: 2px solid $neutral-dark;
+      border-radius: 5px;
+      color: $neutral-dark;
+      font-weight: bold;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: $rsvp-hover;
+        color: $secondary-cream;
+      }
+    }
+  }
+}
+
+// Hero Section
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height:150%;
+  padding:2rem 6rem;
+
+  .left {
+    flex: 1.2;
+    padding-right: 2rem;
+    background: red;
+    height:150%;
+
+    .title {
+      font-size: 4rem;
+      font-weight: bold;
+      color: $primary-blue;
+    }
+
+    .subtitle {
+      font-size: 1.8rem;
+      margin-top: 1rem;
+    }
+
+    .date {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .rsvpButton {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      color: $secondary-cream;
+      background-color: $primary-blue;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: $rsvp-hover;
+      }
+    }
+  }
+
+  .right {
+    flex: 1;
+    position: relative;
+
+    .backgroundImage {
+      width: 100%;
+      height: 90vh;
+     // object-fit: cover;
+     // border-radius: 10px;
+    }
+  }
+
+  .floatingImage {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+
+    .coupleImage {
+      width: 400px;
+      height: auto;
+     // border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+
+    .left {
+      padding: 0;
+      margin-bottom: 2rem;
+
+      .title {
+        font-size: 3rem;
+      }
+    }
+
+    .floatingImage {
+      position: static;
+      transform: none;
+
+      .coupleImage {
+        margin: 0 auto;
+      }
+    }
+  }
+}
