@@ -213,6 +213,141 @@
   animation: slideFromBottom 1s ease-out forwards;
 }
 
+.schedule {
+  padding: 6rem 4rem;
+  background: linear-gradient(to bottom, $secondary-cream, #ffffff);
+  text-align: center;
+
+  .scheduleTitle {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 4rem;
+    color: $neutral-dark;
+  //  font-family: 'Playfair Display', serif; // Elegant serif font
+    //text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 3px solid $primary-blue; // Bold underline for emphasis
+    display: inline-block;
+    padding-bottom: 0.5rem;
+  }
+
+  .eventList {
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Center all cards
+    gap: 3rem;
+    max-width: 800px; // Restrict maximum width for better readability
+    margin: 0 auto; // Center the entire list horizontally
+  }
+
+  .event {
+    background: linear-gradient(135deg, $secondary-cream, rgba(255, 240, 245, 0.9));
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    width: 100%;
+    max-width: 700px;
+  
+    // Add subtle floral pattern
+    background-image: url('/img/roses-pattern.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.95; // Slight transparency for elegance
+  
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      height: 3px;
+      background: linear-gradient(to right, $primary-blue, transparent, $primary-blue);
+    }
+  
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      height: 3px;
+      background: linear-gradient(to right, $primary-blue, transparent, $primary-blue);
+    }
+  
+    .eventTitle {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: $primary-blue;
+      font-family: 'Playfair Display', serif;
+      text-transform: capitalize;
+    }
+  
+    .eventDate,
+    .eventTime {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: $neutral-dark;
+      font-family: 'Georgia', serif;
+    }
+  
+    .eventDetails {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: $neutral-dark;
+      font-family: 'Georgia', serif;
+  
+      strong {
+        color: $primary-blue;
+      }
+    }
+  
+    // Hover Effect for Added Interaction
+    &:hover {
+      transform: translateY(-5px);
+      transition: all 0.3s ease;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  
+      &::before,
+      &::after {
+        background: linear-gradient(to right, $primary-blue, $rsvp-hover);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 3rem 2rem;
+
+    .scheduleTitle {
+      font-size: 2.5rem;
+    }
+
+    .event {
+      padding: 2rem 1.5rem;
+
+      .eventTitle {
+        font-size: 1.6rem;
+      }
+
+      .eventDate,
+      .eventTime {
+        font-size: 1.2rem;
+      }
+
+      .eventDetails {
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+    }
+  }
+}
 
 @media (max-width: 768px) {
   .hero {

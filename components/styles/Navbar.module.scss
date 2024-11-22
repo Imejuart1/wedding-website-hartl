@@ -1,0 +1,137 @@
+// Color Variables
+$primary-blue: #7393b3;
+$secondary-cream: #fdf8f5;
+$neutral-dark: #333333;
+$rsvp-hover: #5a7c99;
+
+.navbar {
+    display: flex;
+    font-family: 'Georgia', serif;
+    background-color: $secondary-cream;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 6rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $neutral-dark;
+    }
+    .navLinks {
+      display: flex;
+      gap: 1.5rem;
+  
+      .navLink {
+        text-decoration: none;
+        font-size: 1rem;
+        color: $neutral-dark;
+        transition: color 0.3s;
+  
+        &:hover {
+          color: $primary-blue;
+        }
+      }
+  
+      .rsvpButton {
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border: 2px solid $neutral-dark;
+        border-radius: 5px;
+        color: $neutral-dark;
+        font-weight: bold;
+        transition: all 0.3s;
+  
+        &:hover {
+          background-color: $rsvp-hover;
+          color: $secondary-cream;
+        }
+      }
+    }
+  
+  // Hamburger Menu
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    width: 30px;
+    height: 20px;
+
+    .bar {
+      height: 3px;
+      width: 100%;
+      background-color: $neutral-dark;
+      transition: all 0.3s;
+    }
+
+    &.active {
+      .bar:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      .bar:nth-child(2) {
+        opacity: 0;
+      }
+      .bar:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+    }
+  }
+
+  // Mobile Menu Styles
+  .navLinksMobile {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: $secondary-cream;
+    padding: 1rem;
+    gap: 1rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  
+
+  
+    @media (max-width: 768px) {
+      padding: 2rem;
+  
+      .scheduleTitle {
+        font-size: 2.4rem;
+      }
+  
+      .event {
+        padding: 1.5rem;
+      }
+  
+      .eventTitle {
+        font-size: 1.5rem;
+      }
+  
+      .eventDate,
+      .eventTime {
+        font-size: 1.1rem;
+      }
+  
+      .eventDetails {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
+    }
+
+    .navLinks {
+      display: none;
+
+      &.navLinksMobile {
+        display: flex;
+      }
+    }
+  }
+
