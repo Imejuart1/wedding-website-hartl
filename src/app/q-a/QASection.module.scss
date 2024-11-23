@@ -1,0 +1,75 @@
+@import "../variables";
+
+// Q&A Section
+.qaSection {
+  padding: 2rem 4rem;
+  background: $secondary-cream;
+  color: $neutral-dark;
+
+  .title {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 4rem;
+    font-family: 'Georgia', serif;
+    color: $primary-blue;
+    border-bottom: 3px solid $primary-blue;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+  }
+
+  .qaContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .qaItem {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      background: rgba(115, 147, 179, 0.05); // Subtle hover effect
+    }
+
+    .question {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: $primary-blue;
+      font-family: "Georgia", serif;
+    }
+
+    .answer {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: $neutral-dark;
+      font-family: "Georgia", serif;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 3rem 2rem;
+
+    .title {
+      font-size: 2.5rem;
+    }
+
+    .qaItem {
+      padding: 1.5rem;
+
+      .question {
+        font-size: 1.4rem;
+      }
+
+      .answer {
+        font-size: 1rem;
+      }
+    }
+  }
+}

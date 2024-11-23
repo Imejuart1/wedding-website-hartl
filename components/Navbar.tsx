@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import styles from "./styles/Navbar.module.scss";
+import Link from "next/link";
 
 export default function Navbar(): JSX.Element {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,15 +28,18 @@ export default function Navbar(): JSX.Element {
           isMobileMenuOpen ? styles.navLinksMobile : ""
         }`}
       >
-        <a href="#wedding" className={styles.navLink}>
-          The Wedding
-        </a>
-        <a href="#registry" className={styles.navLink}>
-          Registry
-        </a>
-        <a href="#getting-there" className={styles.navLink}>
-          Getting There
-        </a>
+        <Link href="/" className={styles.navLink}>
+         Home
+        </Link>
+        <Link href="/photos" className={styles.navLink}>
+          Photos
+        </Link>
+        <Link href="/q-a" className={styles.navLink}>
+        Q & A
+        </Link>
+        <Link href="/travel" className={styles.navLink}>
+        Travel
+        </Link>
         <a href="#rsvp" className={styles.rsvpButton}>
           RSVP
         </a>
