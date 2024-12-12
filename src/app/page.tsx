@@ -1,156 +1,71 @@
-"use client"
-import { useEffect, useState } from 'react';
-import styles from './Home.module.scss';
+"use client";
+import { useState } from "react";
+import styles from "./Page.module.scss";
+import Lightbox from "./Lightbox";
 
 export default function Home() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [typedText, setTypedText] = useState("");
+  const [uploads, setUploads] = useState<{ type: "image" | "video"; src: string }[]>([]);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  useEffect(() => {
-    const loadImages = setTimeout(() => setIsLoaded(true), 1000); 
-    return () => clearTimeout(loadImages);
-  }, []);
-
-  useEffect(() => {
-    if (isLoaded) {
-      const locationText = "CISON DI VALMARINO, PROVINCE OF TREVISO";
-      let index = 0;
-
-      const typeWriter = setInterval(() => {
-        if (index < locationText.length) {
-          setTypedText(locationText.slice(0, index + 1));
-          index++;
-        } else {
-          clearInterval(typeWriter);
-        }
-      }, 100); // Typing speed in ms
-
-      return () => clearInterval(typeWriter);
+  const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files) {
+      Array.from(files).forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const src = e.target?.result as string;
+          const type = file.type.startsWith("video") ? "video" : "image";
+          setUploads((prev) => [...prev, { type, src }]);
+        };
+        reader.readAsDataURL(file);
+      });
     }
-  }, [isLoaded]);
+  };
+
   return (
     <div className={styles.container}>
+      <header className={styles.header}>
+        <h1>Thank You for Celebrating With Us</h1>
+        <p>We are so grateful to have shared this special moment with you.</p>
+        <label htmlFor="upload" className={styles.uploadButton}>
+          Upload Your Memories
+        </label>
+        <input
+          id="upload"
+          type="file"
+          accept="image/*,video/*"
+          multiple
+          onChange={handleUpload}
+          style={{ display: "none" }}
+        />
+      </header>
 
-      {/* Hero Section */}
-      <span className={styles.location}>{typedText}</span>
-      <section className={styles.hero}>
-        {/* Left Section: Text */}
-        <div className={`${styles.left} ${isLoaded ? styles.animateLeft : ''}`}>
-          <h1 className={styles.title}>Tanseli & Roger</h1>
-          <p className={styles.subtitle}>We&apos;re getting married!</p>
-          <p className={styles.date}>Saturday, August 30, 2024</p>
-          <a href="#rsvp" className={styles.rsvpButton}>RSVP</a>
-        </div>
-
-        {/* Right Section: Background Image */}
-        <div className={`${styles.right} ${isLoaded ? styles.animateRight : ''}`}>
-          <img
-            src="/img/mary.png"
-            alt="Background trees"
-            className={styles.backgroundImage}
-          />
-        </div>
-
-        {/* Floating Image of the Couple */}
-       {/*} <div className={styles.floatingImage}>
-          <img
-            src="/img/Rogertanseli.jpg"
-            alt="Tanseli and Roger"
-            className={styles.coupleImage}
-          />
-        </div>*/}
-      </section>
-
-      <section className={styles.excite}>
-        <p>We&apos;re so excited to celebrate this special moment with our closest loved ones!</p>
-      </section>
-
-      <section className={styles.schedule}>
-        <h2 className={styles.scheduleTitle}>Event Schedule</h2>
-        <div className={styles.eventList}>
-          <div className={styles.event}>
-            <h3 className={styles.eventTitle}>Welcome Reception</h3>
-            <p className={styles.eventDate}>Friday, August 30, 2024</p>
-            <p className={styles.eventTime}>18:00–20:30</p>
-            <p className={styles.eventDetails}>
-              <strong>Attire:</strong> Casual <br />
-              Caffe Roma <br />
-              Piazza Roma 7 Cison di Valmarino <br />
-              Drinks and light bites will be served
-            </p>
-          </div>
-
-          <div className={styles.event}>
-            <h3 className={styles.eventTitle}>After Party</h3>
-            <p className={styles.eventDate}>Saturday, August 31, 2024</p>
-            <p className={styles.eventTime}>23:30–02:00</p>
-            <p className={styles.eventDetails}>
-              <strong>Attire:</strong> Come as you like <br />
-              Cantina di Ottone Castel Brando
-            </p>
-          </div>
-
-          <div className={styles.event}>
-            <h3 className={styles.eventTitle}>Day After Breakfast</h3>
-            <p className={styles.eventDate}>Sunday, September 1, 2024</p>
-            <p className={styles.eventTime}>09:00–12:00</p>
-            <p className={styles.eventDetails}>
-              <strong>Attire:</strong> Casual <br />
-              Sansovino Restaurant Castel Brando
-            </p>
-          </div>
-
-          <div className={styles.event}>
-            <h3 className={styles.eventTitle}>Farewell Reception</h3>
-            <p className={styles.eventDate}>Sunday, September 1, 2024</p>
-            <p className={styles.eventTime}>19:00–00:00</p>
-            <p className={styles.eventDetails}>
-              <strong>Attire:</strong> Casual <br />
-              Casa Hartl <br />
-              Tanseli and Roger’s home <br />
-              Via Vittorio Veneto 3 <br />
-              Cison di Valmarino <br />
-              Drinks and light bites will be served
-            </p>
-          </div>
-
-          <div className={styles.event}>
-            <h3 className={styles.eventTitle}>Wedding Day</h3>
-            <p className={styles.eventDate}>Sunday, September 1, 2024</p>
-            <p className={styles.eventTime}>19:00–23:30</p>
-            <p className={styles.eventDetails}>
-              <strong>Attire:</strong> Formal / Black Tie <br />
-              Seated Dinner <br />
-              Dance and Party with us <br />
-              Teatro Tenda Castel Brando, Cison di Valmarino
-            </p>
-          </div>
+      <section className={styles.gallery}>
+        <h2>Memories</h2>
+        <div className={styles.mediaGrid}>
+          {uploads.map((upload, index) => (
+            <div
+              key={index}
+              className={styles.mediaWrapper}
+              onClick={() => setLightboxIndex(index)}
+            >
+              {upload.type === "image" ? (
+                <img src={upload.src} alt={`Memory ${index + 1}`} className={styles.media} />
+              ) : (
+                <video src={upload.src} className={styles.media} controls></video>
+              )}
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className={styles.ceremonyReception}>
-  <div className={styles.event}>
-    <div className={styles.time}>17:00–18:00</div>
-    <div className={styles.details}>
-      <h3 className={styles.title}>Ceremony</h3>
-      <p>Attire: Formal / Black Tie</p>
-      <p>San Martino Chapel Castel Brando</p>
-    </div>
-  </div>
-
-  <div className={styles.event}>
-    <div className={styles.time}>18:00–19:00</div>
-    <div className={styles.details}>
-      <h3 className={styles.title}>Reception</h3>
-      <p>Attire: Formal</p>
-      <p>Reception San Martino Terrace Castel Brando</p>
-    </div>
-  </div>
-
-  <div className={styles.logo}>
-    <p>T&amp;R</p>
-  </div>
-</section>
+      {lightboxIndex !== null && (
+        <Lightbox
+          media={uploads}
+          initialIndex={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+        />
+      )}
     </div>
   );
 }
