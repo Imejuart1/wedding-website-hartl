@@ -1,32 +1,30 @@
 "use client";
 import { useState } from "react";
 import styles from "./Page.module.scss";
-import Lightbox from "./Lightbox";
+import Link from "next/link";
 
-export default function Home() {
-  const [uploads, setUploads] = useState<{ type: "image" | "video"; src: string }[]>([]);
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+export default function Home(): JSX.Element {
+  const [uploads, setUploads] = useState<
+    { type: "image" | "video"; src: string }[]
+  >([]);
 
   const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
-      Array.from(files).forEach((file) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const src = e.target?.result as string;
-          const type = file.type.startsWith("video") ? "video" : "image";
-          setUploads((prev) => [...prev, { type, src }]);
-        };
-        reader.readAsDataURL(file);
+      const newUploads = Array.from(files).map((file) => {
+        const src = URL.createObjectURL(file);
+        const type = file.type.startsWith("video") ? "video" : "image";
+        return { type, src };
       });
+      setUploads((prev: any) => [...prev, ...newUploads]);
     }
   };
 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1>Thank You for Celebrating With Us</h1>
-        <p>We are so grateful to have shared this special moment with you.</p>
+        <h1>Welcome to Our Special Day</h1>
+        <p>Celebrate the moments we shared with these memories.</p>
         <label htmlFor="upload" className={styles.uploadButton}>
           Upload Your Memories
         </label>
@@ -40,32 +38,29 @@ export default function Home() {
         />
       </header>
 
-      <section className={styles.gallery}>
-        <h2>Memories</h2>
+      <section className={styles.galleryPreview}>
+        {uploads.length > 1 && <h2>Featured Memories</h2>}
         <div className={styles.mediaGrid}>
-          {uploads.map((upload, index) => (
-            <div
-              key={index}
-              className={styles.mediaWrapper}
-              onClick={() => setLightboxIndex(index)}
-            >
+          {uploads.slice(0, 3).map((upload, index) => (
+            <div key={index} className={styles.mediaWrapper}>
               {upload.type === "image" ? (
-                <img src={upload.src} alt={`Memory ${index + 1}`} className={styles.media} />
+                <img
+                  src={upload.src}
+                  alt={`Memory ${index + 1}`}
+                  className={styles.media}
+                />
               ) : (
-                <video src={upload.src} className={styles.media} controls></video>
+                <video src={upload.src} className={styles.media} controls />
               )}
             </div>
           ))}
         </div>
+        {uploads.length > 3 && (
+          <Link href="/photos" className={styles.viewMoreButton}>
+            View More Memories
+          </Link>
+        )}
       </section>
-
-      {lightboxIndex !== null && (
-        <Lightbox
-          media={uploads}
-          initialIndex={lightboxIndex}
-          onClose={() => setLightboxIndex(null)}
-        />
-      )}
     </div>
   );
 }
